@@ -8,7 +8,7 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  String displayXO = "";
+  List<String> displayXO = ['', '', '', '', '', '', '', '', ''];
 
   @override
   Widget build(BuildContext context) {
@@ -16,29 +16,31 @@ class _HomepageState extends State<Homepage> {
       backgroundColor: Colors.grey.shade800,
       body: GridView.builder(
           itemCount: 9,
-          gridDelegate:
-              SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
-          itemBuilder: ((context, index) {
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 3),
+          itemBuilder: (BuildContext context, int index) {
             return GestureDetector(
-              onTap: onTap,
+              onTap: () {
+                _onTap(index);
+              },
               child: Container(
                 decoration: BoxDecoration(
                     border: Border.all(color: Colors.grey.shade700)),
                 child: Center(
                   child: Text(
-                    displayXO,
-                    style: TextStyle(color: Colors.white, fontSize: 40),
+                    displayXO[index],
+                    style: const TextStyle(color: Colors.white, fontSize: 40),
                   ),
                 ),
               ),
             );
-          })),
+          }),
     );
   }
 
-  void onTap() {
+  void _onTap(int index) {
     setState(() {
-      displayXO = "O";
+      displayXO[index] = 'o';
     });
   }
 }
