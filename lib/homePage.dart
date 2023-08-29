@@ -53,6 +53,13 @@ class _HomepageState extends State<Homepage> {
     );
   }
 
-  void checkWinner() {}
+  void checkWinner() {
+    if (displayXO[0] == displayXO[1] &&
+        displayXO[0] == displayXO[2] &&
+        displayXO[0] != '') {
+      showWinDialog();
+    }
+  }
+
   void showWinDialog() {}
 }
