@@ -61,52 +61,71 @@ class _HomepageState extends State<Homepage> {
     if (displayXO[0] == displayXO[1] &&
         displayXO[0] == displayXO[2] &&
         displayXO[0] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[0]);
     }
     //checks the first column
     if (displayXO[0] == displayXO[3] &&
         displayXO[0] == displayXO[6] &&
         displayXO[0] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[0]);
     }
     //check diagonal one
     if (displayXO[0] == displayXO[4] &&
         displayXO[0] == displayXO[8] &&
         displayXO[0] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[0]);
     }
 
     ///check second column
     if (displayXO[1] == displayXO[4] &&
         displayXO[1] == displayXO[7] &&
         displayXO[1] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[1]);
     }
     //checks the third column
     if (displayXO[2] == displayXO[5] &&
         displayXO[2] == displayXO[8] &&
         displayXO[2] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[2]);
     }
     //checks the second diagonal
     if (displayXO[2] == displayXO[4] &&
         displayXO[2] == displayXO[6] &&
         displayXO[2] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[2]);
     }
     // checks the second row
     if (displayXO[3] == displayXO[4] &&
         displayXO[3] == displayXO[5] &&
         displayXO[3] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[3]);
     }
     //checks the third row
     if (displayXO[6] == displayXO[7] &&
         displayXO[6] == displayXO[8] &&
         displayXO[6] != '') {
-      showWinDialog();
+      showWinDialog(displayXO[6]);
     }
   }
 
-  void showWinDialog() {}
+  void showWinDialog(String Winner) {
+    showDialog(
+        context: context,
+        builder: ((context) {
+          return AlertDialog(
+            title: Column(
+              children: [
+                Text('${Winner} is the Winner✌️😎'),
+                ElevatedButton(onPressed: resetGame, child: Text("reset"))
+              ],
+            ),
+          );
+        }));
+  }
+
+  void resetGame() {
+    setState(() {
+      displayXO[displayXO.length] = '';
+    });
+  }
 }
