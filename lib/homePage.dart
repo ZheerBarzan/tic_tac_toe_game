@@ -16,35 +16,36 @@ class _HomepageState extends State<Homepage> {
     return Scaffold(
       backgroundColor: Colors.grey.shade800,
       body: GridView.builder(
-          itemCount: 9,
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 3),
-          itemBuilder: (BuildContext context, int index) {
-            return GestureDetector(
-              onTap: () {
-                _onTap(index);
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                    border: Border.all(color: Colors.grey.shade700)),
-                child: Center(
-                  child: Text(
-                    displayXO[index],
-                    style: const TextStyle(color: Colors.white, fontSize: 40),
-                  ),
+        itemCount: 9,
+        gridDelegate:
+            const SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+        itemBuilder: (BuildContext context, int index) {
+          return GestureDetector(
+            onTap: () {
+              _onTap(index);
+            },
+            child: Container(
+              decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey.shade700)),
+              child: Center(
+                child: Text(
+                  displayXO[index],
+                  style: const TextStyle(color: Colors.white, fontSize: 40),
                 ),
               ),
-            );
-          }),
+            ),
+          );
+        },
+      ),
     );
   }
 
   void _onTap(int index) {
     setState(
       () {
-        if (turn) {
+        if (turn && displayXO[index] == '') {
           displayXO[index] = 'o';
-        } else {
+        } else if (!turn && displayXO[index] == '') {
           displayXO[index] = "x";
         }
         turn = !turn;
@@ -52,9 +53,6 @@ class _HomepageState extends State<Homepage> {
       },
     );
   }
-  //012
-  //345
-  //678
 
   void checkWinner() {
     // checks the first row
@@ -116,7 +114,21 @@ class _HomepageState extends State<Homepage> {
             title: Column(
               children: [
                 Text('${Winner} is the Winner✌️😎'),
-                ElevatedButton(onPressed: resetGame, child: Text("reset"))
+                Padding(
+                  padding: EdgeInsets.only(top: 20, right: 20),
+                  child: Align(
+                    alignment: Alignment.bottomRight,
+                    child: ElevatedButton(
+                      onPressed: resetGame,
+                      child: Icon(
+                        Icons.replay,
+                        color: Colors.white,
+                      ),
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black),
+                    ),
+                  ),
+                ),
               ],
             ),
           );
@@ -125,7 +137,9 @@ class _HomepageState extends State<Homepage> {
 
   void resetGame() {
     setState(() {
-      displayXO[displayXO.length] = '';
+      for (int i = 0; i < displayXO.length; i++) {
+        displayXO[i] = '';
+      }
     });
   }
 }
