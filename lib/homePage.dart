@@ -12,6 +12,10 @@ class _HomepageState extends State<Homepage> {
   bool turn = true;
   List<String> displayXO = ['', '', '', '', '', '', '', '', ''];
 
+  var myStyle = GoogleFonts.pressStart2p(color: Colors.white, fontSize: 15);
+  var myStyleXO = GoogleFonts.pressStart2p(color: Colors.white, fontSize: 40);
+  int OScore = 0;
+  int XScore = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +27,37 @@ class _HomepageState extends State<Homepage> {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: <Widget>[
-                  Text(
-                    "Player X",
-                    style: GoogleFonts.pressStart2p(color: Colors.white),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Player X",
+                        style: myStyle,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        XScore.toString(),
+                        style: myStyle,
+                      ),
+                    ],
                   ),
-                  Text(
-                    "Player O",
-                    style: GoogleFonts.pressStart2p(color: Colors.white),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(
+                        "Player O",
+                        style: myStyle,
+                      ),
+                      const SizedBox(
+                        height: 20,
+                      ),
+                      Text(
+                        OScore.toString(),
+                        style: myStyle,
+                      ),
+                    ],
                   ),
                 ],
               ),
@@ -53,7 +81,7 @@ class _HomepageState extends State<Homepage> {
                   child: Center(
                     child: Text(
                       displayXO[index],
-                      style: const TextStyle(color: Colors.white, fontSize: 40),
+                      style: myStyleXO,
                     ),
                   ),
                 ),
@@ -70,9 +98,9 @@ class _HomepageState extends State<Homepage> {
     setState(
       () {
         if (turn && displayXO[index] == '') {
-          displayXO[index] = 'o';
+          displayXO[index] = 'O';
         } else if (!turn && displayXO[index] == '') {
-          displayXO[index] = "x";
+          displayXO[index] = "X";
         }
         turn = !turn;
         checkWinner();
@@ -132,33 +160,43 @@ class _HomepageState extends State<Homepage> {
     }
   }
 
-  void showWinDialog(String Winner) {
+  void showWinDialog(String winner) {
     showDialog(
-        context: context,
-        builder: ((context) {
-          return AlertDialog(
-            title: Column(
-              children: [
-                Text('${Winner} is the Winner✌️😎'),
-                Padding(
-                  padding: EdgeInsets.only(top: 20, right: 20),
-                  child: Align(
-                    alignment: Alignment.bottomRight,
-                    child: ElevatedButton(
-                      onPressed: resetGame,
-                      child: Icon(
-                        Icons.replay,
-                        color: Colors.white,
-                      ),
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black),
+      barrierDismissible: false,
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: Column(
+            children: [
+              Text('$winner is the Winner✌️😎'),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, right: 20),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      resetGame();
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(
+                      Icons.replay,
+                      color: Colors.white,
                     ),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   ),
                 ),
-              ],
-            ),
-          );
-        }));
+              ),
+            ],
+          ),
+        );
+      }),
+    );
+    if (winner == 'O') {
+      OScore = OScore + 1;
+    } else if (winner == 'X') {
+      XScore = XScore + 1;
+    }
   }
 
   void resetGame() {
