@@ -16,6 +16,7 @@ class _HomepageState extends State<Homepage> {
   var myStyleXO = GoogleFonts.pressStart2p(color: Colors.white, fontSize: 40);
   int OScore = 0;
   int XScore = 0;
+  int fillBox = 0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -99,8 +100,10 @@ class _HomepageState extends State<Homepage> {
       () {
         if (turn && displayXO[index] == '') {
           displayXO[index] = 'O';
+          fillBox += 1;
         } else if (!turn && displayXO[index] == '') {
           displayXO[index] = "X";
+          fillBox += 1;
         }
         turn = !turn;
         checkWinner();
@@ -157,6 +160,8 @@ class _HomepageState extends State<Homepage> {
         displayXO[6] == displayXO[8] &&
         displayXO[6] != '') {
       showWinDialog(displayXO[6]);
+    } else if (fillBox == 9) {
+      showDrawDialog();
     }
   }
 
@@ -205,5 +210,40 @@ class _HomepageState extends State<Homepage> {
         displayXO[i] = '';
       }
     });
+    fillBox = 0;
+  }
+
+  void showDrawDialog() {
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: ((context) {
+        return AlertDialog(
+          title: Column(
+            children: [
+              Text('its a Draw ✌️😎'),
+              Padding(
+                padding: const EdgeInsets.only(top: 20, right: 20),
+                child: Align(
+                  alignment: Alignment.bottomRight,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      resetGame();
+                      Navigator.of(context).pop();
+                    },
+                    child: Icon(
+                      Icons.replay,
+                      color: Colors.white,
+                    ),
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      }),
+    );
   }
 }
