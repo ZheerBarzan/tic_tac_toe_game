@@ -12,86 +12,103 @@ class _HomepageState extends State<Homepage> {
   bool turn = true;
   List<String> displayXO = ['', '', '', '', '', '', '', '', ''];
 
-  var myStyle = GoogleFonts.pressStart2p(color: Colors.white, fontSize: 15);
-  var myStyleXO = GoogleFonts.pressStart2p(color: Colors.white, fontSize: 40);
+  var myStyle = GoogleFonts.pressStart2p(color: Colors.black, fontSize: 15);
+  var myStyleXO = GoogleFonts.pressStart2p(color: Colors.black, fontSize: 40);
   int OScore = 0;
   int XScore = 0;
   int fillBox = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.grey.shade800,
-      body: Column(children: <Widget>[
-        Expanded(
-          child: Container(
-            child: Center(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: <Widget>[
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Player X",
-                        style: myStyle,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        XScore.toString(),
-                        style: myStyle,
-                      ),
-                    ],
-                  ),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Player O",
-                        style: myStyle,
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Text(
-                        OScore.toString(),
-                        style: myStyle,
-                      ),
-                    ],
-                  ),
-                ],
+    return SafeArea(
+      child: Scaffold(
+        backgroundColor: Colors.grey.shade300,
+        body: Column(children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Center(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: <Widget>[
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Player X",
+                          style: myStyle,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          XScore.toString(),
+                          style: myStyle,
+                        ),
+                      ],
+                    ),
+                    Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Player O",
+                          style: myStyle,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Text(
+                          OScore.toString(),
+                          style: myStyle,
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
-        ),
-        Expanded(
-          flex: 3,
-          child: GridView.builder(
-            itemCount: 9,
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 3),
-            itemBuilder: (BuildContext context, int index) {
-              return GestureDetector(
-                onTap: () {
-                  _onTap(index);
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                      border: Border.all(color: Colors.grey.shade700)),
-                  child: Center(
-                    child: Text(
-                      displayXO[index],
-                      style: myStyleXO,
+          Expanded(
+            flex: 3,
+            child: GridView.builder(
+              itemCount: 9,
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 3),
+              itemBuilder: (BuildContext context, int index) {
+                return GestureDetector(
+                  onTap: () {
+                    _onTap(index);
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey.shade700)),
+                    child: Center(
+                      child: Text(
+                        displayXO[index],
+                        style: myStyleXO,
+                      ),
                     ),
                   ),
-                ),
-              );
-            },
+                );
+              },
+            ),
           ),
-        ),
-        Expanded(child: Container()),
-      ]),
+          Expanded(
+              child: Container(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                Text(
+                  "Tic Tac Toe",
+                  style: myStyle,
+                ),
+                Text(
+                  "Game by ZHEER BARZAN",
+                  style: myStyle,
+                )
+              ],
+            ),
+          )),
+        ]),
+      ),
     );
   }
 
