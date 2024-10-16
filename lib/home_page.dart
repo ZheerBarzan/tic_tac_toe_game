@@ -14,8 +14,8 @@ class _HomepageState extends State<Homepage> {
 
   var myStyle = GoogleFonts.pressStart2p(color: Colors.black, fontSize: 15);
   var myStyleXO = GoogleFonts.pressStart2p(color: Colors.black, fontSize: 40);
-  int OScore = 0;
-  int XScore = 0;
+  int oScore = 0;
+  int xScore = 0;
   int fillBox = 0;
   @override
   Widget build(BuildContext context) {
@@ -40,7 +40,7 @@ class _HomepageState extends State<Homepage> {
                           height: 20,
                         ),
                         Text(
-                          XScore.toString(),
+                          xScore.toString(),
                           style: myStyle,
                         ),
                       ],
@@ -56,7 +56,7 @@ class _HomepageState extends State<Homepage> {
                           height: 20,
                         ),
                         Text(
-                          OScore.toString(),
+                          oScore.toString(),
                           style: myStyle,
                         ),
                       ],
@@ -200,12 +200,12 @@ class _HomepageState extends State<Homepage> {
                       resetGame();
                       Navigator.of(context).pop();
                     },
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
                     child: Icon(
                       Icons.replay,
                       color: Colors.white,
                     ),
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   ),
                 ),
               ),
@@ -215,9 +215,9 @@ class _HomepageState extends State<Homepage> {
       }),
     );
     if (winner == 'O') {
-      OScore = OScore + 1;
+      oScore = oScore + 1;
     } else if (winner == 'X') {
-      XScore = XScore + 1;
+      xScore = xScore + 1;
     }
   }
 
@@ -248,12 +248,12 @@ class _HomepageState extends State<Homepage> {
                       resetGame();
                       Navigator.of(context).pop();
                     },
+                    style:
+                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
                     child: Icon(
                       Icons.replay,
                       color: Colors.white,
                     ),
-                    style:
-                        ElevatedButton.styleFrom(backgroundColor: Colors.black),
                   ),
                 ),
               ),

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:tic_tac_toe_game/homePage.dart';
+import 'package:tic_tac_toe_game/home_page.dart';
 
 void main() {
   runApp(const MyApp());
